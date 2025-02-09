@@ -1,6 +1,9 @@
 import os
 import sys
 import time
+import requests
+
+import warren
 
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
@@ -14,8 +17,25 @@ from cdp_langchain.utils import CdpAgentkitWrapper
 # Configure a file to persist the agent's CDP MPC Wallet Data.
 wallet_data_file = "wallet_data.txt"
 
+def load_env_file(filepath):
+    with open(filepath) as f:
+        for line in f:
+            if line.strip() and not line.startswith('#'):
+                key, value = line.strip().split('=', 1)
+                os.environ[key] = value.strip('"')
 
+def fetch_data(url, key):
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        return data.get(key, None)
+    else:
+        return None
+    
 def initialize_agent():
+    # Load environment variables from .env file.
+    load_env_file('.env')
+
     """Initialize the agent with CDP Agentkit."""
     # Initialize LLM.
     llm = ChatOpenAI(model="gpt-4o-mini")
@@ -74,8 +94,28 @@ def run_autonomous_mode(agent_executor, config, interval=10):
         try:
             # Provide instructions autonomously
             thought = (
-                "Be creative and do something interesting on the blockchain. "
-                "Choose an action or set of actions and execute it that highlights your abilities."
+                f"""
+                Act as a highly motivated world class DeFi strategist with deep understanding of DeFi Protocols, security of DeFi and risks around restaking platforms.
+
+                Your Task Is :
+                * To evaluate and find restaking opportunities in the world of DeFi that gives users a profitable yield each time. I have uploaded the data below.
+
+                Instructions :
+                * Always go step by step. 
+                * Use <thinking> to think through everything before you respond. 
+                * After you're done thinking use <synthesise> to connect different dots and filter out issues early.
+                * Finally, once you're done finally use <reflect> and then answer and give me a list of what could be a profitable investment for me. 
+                * Also tell me what are your preconceived notions / assumptions that you're considering as a world class strategist.
+
+                Note : 
+                * You have seen multiple cycles. 
+                * You have made 1 mil from 100k multiples times with DeFi. 
+
+                <information>
+                Consider the APY and TVL data from Renzo, KelpDAO, and EtherFi protocols.
+                        
+                </information>
+                """
             )
 
             # Run agent in autonomous mode

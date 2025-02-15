@@ -16,10 +16,9 @@
     Every agent deserves a wallet.
   </p>
 
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/cdp-agentkit-core?style=flat-square)](https://pypistats.org/packages/cdp-agentkit-core)
-[![npm downloads](https://img.shields.io/npm/dm/@coinbase/cdp-agentkit-core?style=flat-square)](https://www.npmjs.com/package/@coinbase/agentkit)
-[![GitHub star chart](https://img.shields.io/github/stars/coinbase/cdp-agentkit?style=flat-square)](https://star-history.com/#coinbase/agentkit)
-[![Open Issues](https://img.shields.io/github/issues-raw/coinbase/cdp-agentkit?style=flat-square)](https://github.com/coinbase/agentkit/issues)
+[![npm downloads](https://img.shields.io/npm/dm/@coinbase/agentkit?style=flat-square)](https://www.npmjs.com/package/@coinbase/agentkit)
+[![GitHub star chart](https://img.shields.io/github/stars/coinbase/agentkit?style=flat-square)](https://star-history.com/#coinbase/agentkit)
+[![Open Issues](https://img.shields.io/github/issues-raw/coinbase/agentkit?style=flat-square)](https://github.com/coinbase/agentkit/issues)
 
 </div>
 
@@ -112,18 +111,18 @@ Your wallet has been successfully funded with testnet ETH. You can view the tran
 git clone https://github.com/coinbase/agentkit.git
 
 # Navigate to the chatbot-python example
-cd agentkit/python/examples/cdp-langchain-chatbot 
+cd agentkit/python/examples/langchain-cdp-chatbot 
 
 # At this point, fill in your CDP API key name, private key, and OpenAI API key in the
-# .env.example file.
-# Then, rename the .env.example file to .env
-mv .env.example .env
+# .env.local file.
+# Then, rename the .env.local file to .env
+mv .env.local .env
 
 # Install dependencies
 poetry install
 
 # Run the chatbot
-make run
+poetry run python chatbot.py
 ```
 2. Select "1. chat mode" and start telling your Agent to do things onchain!
 
@@ -145,7 +144,7 @@ Your wallet has been successfully funded with testnet ETH. You can view the tran
 AgentKit is organized as a monorepo that contains multiple packages.
 
 ```
-./
+agentkit/
 ├── typescript/
 │   ├── agentkit/
 │   ├── framework-extensions/
@@ -153,14 +152,16 @@ AgentKit is organized as a monorepo that contains multiple packages.
 │   └── examples/
 │       ├── langchain-cdp-chatbot/
 │       ├── langchain-farcaster-chatbot/
+│       └── langchain-privy-chatbot/
+│       └── langchain-solana-chatbot/
 │       └── langchain-twitter-chatbot/
 ├── python/
-│   ├── cdp-agentkit-core/
-│   ├── cdp-langchain/
-│   ├── twitter-langchain/
+│   ├── coinbase-agentkit/
+│   ├── framework-extensions/
+│   |   └── langchain/
 │   └── examples/
-│       ├── cdp-langchain-chatbot/
-│       └── twitter-langchain-chatbot/
+│       ├── langchain-cdp-chatbot/
+│       └── langchain-twitter-chatbot/
 ```
 
 ## 🤝 Contributing
@@ -174,8 +175,8 @@ AgentKit is organized as a monorepo that contains multiple packages.
 
 - [AgentKit Documentation](https://docs.cdp.coinbase.com/agentkit/docs/welcome)
 - Python API References
-  - [AgentKit Core](https://coinbase.github.io/agentkit/cdp-agentkit-core/python/index.html)
-  - [AgentKit Langchain Extension](https://coinbase.github.io/agentkit/cdp-langchain/python/index.html)
+  - [AgentKit](https://coinbase.github.io/agentkit/coinbase-agentkit/python/index.html)
+  - [AgentKit Langchain Extension](https://coinbase.github.io/agentkit/coinbase-agentkit-langchain/python/index.html)
 - Node.js API References
   - [AgentKit](https://coinbase.github.io/agentkit/agentkit/typescript/index.html)
   - [AgentKit Langchain Extension](https://coinbase.github.io/agentkit/agentkit-langchain/typescript/index.html)
@@ -189,6 +190,17 @@ See [SECURITY.md](SECURITY.md) for more information.
 
 For feature requests, feedback, or questions, please reach out to us via the 
 [Coinbase Developer Platform Discord](https://discord.com/channels/1220414409550336183/1304126107876069376).
+
+## Supported Protocols
+
+AgentKit is proud to have support for the following protocols, frameworks, and wallet providers:
+
+<a href="https://www.alchemy.com/" target="_blank"><img src="./assets/protocols/alchemy.svg" width="100" height="auto" alt="Alchemy"></a>
+<a href="https://base.org" target="_blank"><img src="./assets/protocols/base.svg" width="100" height="auto" alt="Base"></a>
+<a href="https://farcaster.xyz" target="_blank"><img src="./assets/protocols/farcaster.svg" width="100" height="auto" alt="Farcaster"></a>
+<a href="https://www.moonwell.fi" target="_blank"><img src="./assets/protocols/moonwell.svg" width="100" height="auto" alt="Moonwell"></a>
+<a href="https://app.morpho.org" target="_blank"><img src="./assets/protocols/morpho.svg" width="100" height="auto" alt="Morpho"></a>
+<a href="https://pyth.network" target="_blank"><img src="./assets/protocols/pyth.svg" width="100" height="auto" alt="Pyth"></a>
 
 ## 📝 License
 
